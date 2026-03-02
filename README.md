@@ -174,3 +174,82 @@ public partial class Register
     [MaxLength(10, ErrorMessage = "Maximum 10 digit is allowed")]
     public string Phone { get; set; }
 }
+
+
+Kestral web server is the deafult
+-----------------
+
+The Important things about the Program .cs page:
+-----------------------------------------------
+// 1. create builder:Contains a logic to create /load kestral
+// 2. contains a logic to load appsettings.json and launch settings
+var builder = WebApplication.CreateBuilder(args);
+
+// what is builder object?
+
+
+
+// using builder object we can add services & features
+// sessions,authentication,cookies,caching
+
+
+builder.Services.AddControllersWithViews();
+// now webserver can handling controller.cs and view.cshtml file
+// can process controller file and view file
+// returns --> ViewResult,IAction,string,content,json,javascript
+
+
+// Add session features to the project 
+builder.Services.AddSession();
+
+// build method will load and compile the services which is been added
+var app = builder.Build();
+// after this we cannot add any more services
+
+// using app object we can configure the middle ware
+
+// in the middle we can design how the application should behave if error occurs (Http error)
+// how application should behave invalid url is entered
+// should be have if wrong user trying the access the site
+
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+// there are three custom page error
+
+
+// app.UseStatusCodePages(); // the default one
+
+// app.UseStatusCodePagesWithRedirects() --> which redirects into url
+
+// app.UseStatusCodePagesWithReExecute() --> the wrong page is remains in the url
+
+
+
+// use https instead of http
+app.UseHttpsRedirection();
+
+
+// app.MapStaticAssets(); allows to run css,javascript and image file
+
+app.UseStaticFiles();
+
+// used for custom path 
+app.UseRouting();
+app.UseSession();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=PizzaApp}/{action=Home}/{id?}");
+
+app.Run();
+
+
+
