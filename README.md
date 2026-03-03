@@ -252,4 +252,11 @@ app.MapControllerRoute(
 app.Run();
 
 
+--------------------------------------------------------------
+any methods begins with Add keyword its called as services
+
+any methods begins with use keyword its called as Middleware
+
+--------------------------------------------------------------
+
 
