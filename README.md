@@ -154,9 +154,7 @@ public partial class Register
 {
     [Required(ErrorMessage ="Please enter the username")]
     public string Uname { get; set; }
-
-
-
+    
     [Required(ErrorMessage = "Please enter the password")]
     [MinLength(8,ErrorMessage ="* character is requied")]
     [MaxLength(25, ErrorMessage = "Maximum 25 character is allowed")]
